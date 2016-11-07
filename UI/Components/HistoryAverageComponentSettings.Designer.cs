@@ -555,9 +555,15 @@
             this.tableLayoutPanel3.SetColumnSpan(this.txtTwo, 2);
             this.txtTwo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtTwo.Location = new System.Drawing.Point(147, 3);
+            this.txtTwo.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.txtTwo.Name = "txtTwo";
             this.txtTwo.Size = new System.Drawing.Size(283, 20);
             this.txtTwo.TabIndex = 0;
+            this.txtTwo.ValueChanged += new System.EventHandler(this.txtTwo_ValueChanged);
             // 
             // rdoSeconds
             // 
@@ -570,7 +576,7 @@
             this.rdoSeconds.TabStop = true;
             this.rdoSeconds.Text = "Seconds";
             this.rdoSeconds.UseVisualStyleBackColor = true;
-            this.rdoSeconds.CheckedChanged += new System.EventHandler(this.rdoHundredths_CheckedChanged);
+            this.rdoSeconds.CheckedChanged += new System.EventHandler(this.rdoSeconds_CheckedChanged);
             // 
             // rdoTenths
             // 
@@ -583,6 +589,7 @@
             this.rdoTenths.TabStop = true;
             this.rdoTenths.Text = "Tenths";
             this.rdoTenths.UseVisualStyleBackColor = true;
+            this.rdoTenths.CheckedChanged += new System.EventHandler(this.rdoTenths_CheckedChanged);
             // 
             // rdoHundredths
             // 
@@ -595,6 +602,7 @@
             this.rdoHundredths.TabStop = true;
             this.rdoHundredths.Text = "Hundredths";
             this.rdoHundredths.UseVisualStyleBackColor = true;
+            this.rdoHundredths.CheckedChanged += new System.EventHandler(this.rdoHundredths_CheckedChanged);
             // 
             // HistoryAverageComponentSettings
             // 

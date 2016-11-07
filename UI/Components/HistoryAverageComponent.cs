@@ -66,7 +66,28 @@ namespace LiveSplit.UI.Components
 
         void UpdateHistoryValue(LiveSplitState state)
         {
-            HistoryAverageValue = new TimeSpan(0, 1, 23);
+            var hist = state.Run.AttemptHistory;
+            int size = Settings.HistorySize;
+            int foundRuns = 0;
+            TimeSpan totalTime = new TimeSpan();
+            for (int i = hist.Count - 1; i >= 0; --i)
+            {
+                var time = hist[i].Time;
+                if(time.RealTime.HasValue)
+                {
+                    totalTime += time.RealTime.Value;
+                    ++foundRuns;
+                    if (foundRuns >= Settings.HistorySize && Settings.HistorySize > 0)
+                        break;                   
+                }
+
+            }
+            double avgMillis = 0;
+            if (foundRuns > 0)
+            {
+                avgMillis = totalTime.TotalMilliseconds / foundRuns;
+            }
+            HistoryAverageValue = new TimeSpan((long)avgMillis * 10000); //10k ticks to a milli
             PreviousTimingMethod = state.CurrentTimingMethod;
         }
 
@@ -101,6 +122,8 @@ namespace LiveSplit.UI.Components
         {
             DrawBackground(g, state, width, VerticalHeight);
 
+            InternalComponent.InformationName = Settings.Text1;
+
             InternalComponent.DisplayTwoRows = Settings.Display2Rows;
 
             InternalComponent.NameLabel.HasShadow
@@ -118,6 +141,8 @@ namespace LiveSplit.UI.Components
         public void DrawHorizontal(Graphics g, LiveSplitState state, float height, Region clipRegion)
         {
             DrawBackground(g, state, HorizontalWidth, height);
+
+            InternalComponent.InformationName = Settings.Text1;
 
             InternalComponent.NameLabel.HasShadow
                 = InternalComponent.ValueLabel.HasShadow
