@@ -70,16 +70,23 @@ namespace LiveSplit.UI.Components
             int size = Settings.HistorySize;
             int foundRuns = 0;
             TimeSpan totalTime = new TimeSpan();
+            //go backwards through past runs, until we find enough completed ones to build our average
             for (int i = hist.Count - 1; i >= 0; --i)
             {
-                var time = hist[i].Time;
-                if(time.RealTime.HasValue)
+                TimeSpan? span;
+                if (state.CurrentTimingMethod == TimingMethod.RealTime)
+                    span = hist[i].Time.RealTime;
+                else
+                    span = hist[i].Time.GameTime;
+
+                if (span.HasValue)
                 {
-                    totalTime += time.RealTime.Value;
+                    totalTime += span.Value;
                     ++foundRuns;
                     if (foundRuns >= Settings.HistorySize && Settings.HistorySize > 0)
                         break;                   
                 }
+                //if span didn't have a value, that just means it was an incomplete run, which we ignore
 
             }
             double avgMillis = 0;

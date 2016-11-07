@@ -63,7 +63,6 @@
     <Compile Include="UI\Components\HistoryAverageComponentSettings.Designer.cs">
       <DependentUpon>HistoryAverageComponentSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Components\InternalHistoryAverageComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\LiveSplit.Core\LiveSplit.Core.csproj">
