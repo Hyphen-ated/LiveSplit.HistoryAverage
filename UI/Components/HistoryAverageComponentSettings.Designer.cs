@@ -28,7 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.chkTwoRows = new System.Windows.Forms.CheckBox();
+            this.btnColor2 = new System.Windows.Forms.Button();
+            this.btnColor1 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cmbGradientType = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -44,6 +48,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtOne = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -58,51 +63,87 @@
             this.btnTimeColor = new System.Windows.Forms.Button();
             this.chkOverrideTimeColor = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtTwo = new System.Windows.Forms.TextBox();
-            this.cmbGradientType = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.btnColor1 = new System.Windows.Forms.Button();
-            this.btnColor2 = new System.Windows.Forms.Button();
-            this.chkTwoRows = new System.Windows.Forms.CheckBox();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.txtTwo = new System.Windows.Forms.NumericUpDown();
+            this.rdoSeconds = new System.Windows.Forms.RadioButton();
+            this.rdoTenths = new System.Windows.Forms.RadioButton();
+            this.rdoHundredths = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTwo)).BeginInit();
             this.SuspendLayout();
             // 
-            // tableLayoutPanel1
+            // chkTwoRows
             // 
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 159F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.groupBox2, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.cmbGradientType, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label11, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnColor1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnColor2, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.chkTwoRows, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(7, 7);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 221F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 9F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(445, 500);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.chkTwoRows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkTwoRows.AutoSize = true;
+            this.chkTwoRows.Location = new System.Drawing.Point(7, 35);
+            this.chkTwoRows.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.chkTwoRows.Name = "chkTwoRows";
+            this.chkTwoRows.Size = new System.Drawing.Size(149, 17);
+            this.chkTwoRows.TabIndex = 3;
+            this.chkTwoRows.Text = "Display 2 Rows";
+            this.chkTwoRows.UseVisualStyleBackColor = true;
+            // 
+            // btnColor2
+            // 
+            this.btnColor2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnColor2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnColor2.Location = new System.Drawing.Point(191, 3);
+            this.btnColor2.Name = "btnColor2";
+            this.btnColor2.Size = new System.Drawing.Size(23, 23);
+            this.btnColor2.TabIndex = 1;
+            this.btnColor2.UseVisualStyleBackColor = false;
+            this.btnColor2.Click += new System.EventHandler(this.ColorButtonClick);
+            // 
+            // btnColor1
+            // 
+            this.btnColor1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnColor1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnColor1.Location = new System.Drawing.Point(162, 3);
+            this.btnColor1.Name = "btnColor1";
+            this.btnColor1.Size = new System.Drawing.Size(23, 23);
+            this.btnColor1.TabIndex = 0;
+            this.btnColor1.UseVisualStyleBackColor = false;
+            this.btnColor1.Click += new System.EventHandler(this.ColorButtonClick);
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 8);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(153, 13);
+            this.label11.TabIndex = 31;
+            this.label11.Text = "Background Color:";
+            // 
+            // cmbGradientType
+            // 
+            this.cmbGradientType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbGradientType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbGradientType.FormattingEnabled = true;
+            this.cmbGradientType.Items.AddRange(new object[] {
+            "Plain",
+            "Vertical",
+            "Horizontal"});
+            this.cmbGradientType.Location = new System.Drawing.Point(220, 4);
+            this.cmbGradientType.Name = "cmbGradientType";
+            this.cmbGradientType.Size = new System.Drawing.Size(222, 21);
+            this.cmbGradientType.TabIndex = 2;
             // 
             // groupBox1
             // 
@@ -114,7 +155,7 @@
             this.groupBox1.Size = new System.Drawing.Size(439, 215);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Left Text";
+            this.groupBox1.Text = "Label";
             // 
             // tableLayoutPanel2
             // 
@@ -295,6 +336,31 @@
             this.txtOne.Size = new System.Drawing.Size(274, 20);
             this.txtOne.TabIndex = 0;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 159F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox2, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.cmbGradientType, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label11, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnColor1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnColor2, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.chkTwoRows, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(7, 7);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 221F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 9F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(445, 547);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
             // groupBox2
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.groupBox2, 4);
@@ -302,28 +368,34 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(3, 282);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(439, 215);
+            this.groupBox2.Size = new System.Drawing.Size(439, 262);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Right Text";
+            this.groupBox2.Text = "Average";
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.22222F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.77778F));
-            this.tableLayoutPanel3.Controls.Add(this.groupBox6, 0, 2);
+            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.Controls.Add(this.groupBox6, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.label4, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.groupBox3, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.groupBox3, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.txtTwo, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.rdoSeconds, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.rdoTenths, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.rdoHundredths, 2, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 3;
+            this.tableLayoutPanel3.RowCount = 4;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 83F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 9F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(433, 196);
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(433, 243);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // groupBox6
@@ -331,9 +403,9 @@
             this.tableLayoutPanel3.SetColumnSpan(this.groupBox6, 4);
             this.groupBox6.Controls.Add(this.tableLayoutPanel7);
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox6.Location = new System.Drawing.Point(3, 115);
+            this.groupBox6.Location = new System.Drawing.Point(3, 144);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(427, 78);
+            this.groupBox6.Size = new System.Drawing.Size(427, 96);
             this.groupBox6.TabIndex = 2;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Font";
@@ -354,14 +426,14 @@
             this.tableLayoutPanel7.RowCount = 2;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(421, 59);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(421, 77);
             this.tableLayoutPanel7.TabIndex = 0;
             // 
             // lblFont2
             // 
             this.lblFont2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFont2.AutoSize = true;
-            this.lblFont2.Location = new System.Drawing.Point(148, 37);
+            this.lblFont2.Location = new System.Drawing.Point(148, 46);
             this.lblFont2.Name = "lblFont2";
             this.lblFont2.Size = new System.Drawing.Size(189, 13);
             this.lblFont2.TabIndex = 4;
@@ -370,7 +442,7 @@
             // btnFont2
             // 
             this.btnFont2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFont2.Location = new System.Drawing.Point(343, 32);
+            this.btnFont2.Location = new System.Drawing.Point(343, 41);
             this.btnFont2.Name = "btnFont2";
             this.btnFont2.Size = new System.Drawing.Size(75, 23);
             this.btnFont2.TabIndex = 1;
@@ -396,7 +468,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 37);
+            this.label7.Location = new System.Drawing.Point(3, 46);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(139, 13);
             this.label7.TabIndex = 5;
@@ -408,16 +480,16 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(3, 8);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(142, 13);
+            this.label4.Size = new System.Drawing.Size(138, 13);
             this.label4.TabIndex = 8;
-            this.label4.Text = "Text:";
+            this.label4.Text = "How Far Back To Look:";
             // 
             // groupBox3
             // 
-            this.tableLayoutPanel3.SetColumnSpan(this.groupBox3, 2);
+            this.tableLayoutPanel3.SetColumnSpan(this.groupBox3, 3);
             this.groupBox3.Controls.Add(this.tableLayoutPanel4);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(3, 32);
+            this.groupBox3.Location = new System.Drawing.Point(3, 61);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(427, 77);
             this.groupBox3.TabIndex = 1;
@@ -480,73 +552,49 @@
             // 
             // txtTwo
             // 
+            this.tableLayoutPanel3.SetColumnSpan(this.txtTwo, 2);
             this.txtTwo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtTwo.Location = new System.Drawing.Point(151, 3);
+            this.txtTwo.Location = new System.Drawing.Point(147, 3);
             this.txtTwo.Name = "txtTwo";
-            this.txtTwo.Size = new System.Drawing.Size(279, 20);
+            this.txtTwo.Size = new System.Drawing.Size(283, 20);
             this.txtTwo.TabIndex = 0;
             // 
-            // cmbGradientType
+            // rdoSeconds
             // 
-            this.cmbGradientType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbGradientType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGradientType.FormattingEnabled = true;
-            this.cmbGradientType.Items.AddRange(new object[] {
-            "Plain",
-            "Vertical",
-            "Horizontal"});
-            this.cmbGradientType.Location = new System.Drawing.Point(220, 4);
-            this.cmbGradientType.Name = "cmbGradientType";
-            this.cmbGradientType.Size = new System.Drawing.Size(222, 21);
-            this.cmbGradientType.TabIndex = 2;
+            this.rdoSeconds.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.rdoSeconds.AutoSize = true;
+            this.rdoSeconds.Location = new System.Drawing.Point(3, 35);
+            this.rdoSeconds.Name = "rdoSeconds";
+            this.rdoSeconds.Size = new System.Drawing.Size(67, 17);
+            this.rdoSeconds.TabIndex = 9;
+            this.rdoSeconds.TabStop = true;
+            this.rdoSeconds.Text = "Seconds";
+            this.rdoSeconds.UseVisualStyleBackColor = true;
+            this.rdoSeconds.CheckedChanged += new System.EventHandler(this.rdoHundredths_CheckedChanged);
             // 
-            // label11
+            // rdoTenths
             // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 8);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(153, 13);
-            this.label11.TabIndex = 31;
-            this.label11.Text = "Background Color:";
+            this.rdoTenths.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.rdoTenths.AutoSize = true;
+            this.rdoTenths.Location = new System.Drawing.Point(147, 35);
+            this.rdoTenths.Name = "rdoTenths";
+            this.rdoTenths.Size = new System.Drawing.Size(58, 17);
+            this.rdoTenths.TabIndex = 10;
+            this.rdoTenths.TabStop = true;
+            this.rdoTenths.Text = "Tenths";
+            this.rdoTenths.UseVisualStyleBackColor = true;
             // 
-            // btnColor1
+            // rdoHundredths
             // 
-            this.btnColor1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnColor1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnColor1.Location = new System.Drawing.Point(162, 3);
-            this.btnColor1.Name = "btnColor1";
-            this.btnColor1.Size = new System.Drawing.Size(23, 23);
-            this.btnColor1.TabIndex = 0;
-            this.btnColor1.UseVisualStyleBackColor = false;
-            this.btnColor1.Click += new System.EventHandler(this.ColorButtonClick);
-            // 
-            // btnColor2
-            // 
-            this.btnColor2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnColor2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnColor2.Location = new System.Drawing.Point(191, 3);
-            this.btnColor2.Name = "btnColor2";
-            this.btnColor2.Size = new System.Drawing.Size(23, 23);
-            this.btnColor2.TabIndex = 1;
-            this.btnColor2.UseVisualStyleBackColor = false;
-            this.btnColor2.Click += new System.EventHandler(this.ColorButtonClick);
-            // 
-            // chkTwoRows
-            // 
-            this.chkTwoRows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkTwoRows.AutoSize = true;
-            this.chkTwoRows.Location = new System.Drawing.Point(7, 35);
-            this.chkTwoRows.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
-            this.chkTwoRows.Name = "chkTwoRows";
-            this.chkTwoRows.Size = new System.Drawing.Size(149, 17);
-            this.chkTwoRows.TabIndex = 3;
-            this.chkTwoRows.Text = "Display 2 Rows";
-            this.chkTwoRows.UseVisualStyleBackColor = true;
+            this.rdoHundredths.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.rdoHundredths.AutoSize = true;
+            this.rdoHundredths.Location = new System.Drawing.Point(291, 35);
+            this.rdoHundredths.Name = "rdoHundredths";
+            this.rdoHundredths.Size = new System.Drawing.Size(80, 17);
+            this.rdoHundredths.TabIndex = 11;
+            this.rdoHundredths.TabStop = true;
+            this.rdoHundredths.Text = "Hundredths";
+            this.rdoHundredths.UseVisualStyleBackColor = true;
             // 
             // HistoryAverageComponentSettings
             // 
@@ -555,10 +603,8 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "HistoryAverageComponentSettings";
             this.Padding = new System.Windows.Forms.Padding(7);
-            this.Size = new System.Drawing.Size(459, 514);
+            this.Size = new System.Drawing.Size(459, 561);
             this.Load += new System.EventHandler(this.TextComponentSettings_Load);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
@@ -568,6 +614,8 @@
             this.groupBox4.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
@@ -577,47 +625,51 @@
             this.groupBox3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTwo)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button btnTextColor;
-        private System.Windows.Forms.CheckBox chkOverrideTextColor;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button btnTimeColor;
-        private System.Windows.Forms.CheckBox chkOverrideTimeColor;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmbGradientType;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button btnColor1;
+        private System.Windows.Forms.CheckBox chkTwoRows;
         private System.Windows.Forms.Button btnColor2;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtOne;
-        private System.Windows.Forms.TextBox txtTwo;
+        private System.Windows.Forms.Button btnColor1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox cmbGradientType;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.Label lblFont;
         private System.Windows.Forms.Button btnFont;
         private System.Windows.Forms.CheckBox chkFont;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.Button btnTextColor;
+        private System.Windows.Forms.CheckBox chkOverrideTextColor;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtOne;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.Label lblFont2;
         private System.Windows.Forms.Button btnFont2;
         private System.Windows.Forms.CheckBox chkFont2;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.CheckBox chkTwoRows;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.Button btnTimeColor;
+        private System.Windows.Forms.CheckBox chkOverrideTimeColor;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown txtTwo;
+        private System.Windows.Forms.RadioButton rdoSeconds;
+        private System.Windows.Forms.RadioButton rdoTenths;
+        private System.Windows.Forms.RadioButton rdoHundredths;
     }
 }

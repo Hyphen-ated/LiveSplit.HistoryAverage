@@ -1,4 +1,5 @@
 ﻿using LiveSplit.Model;
+using LiveSplit.TimeFormatters;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -23,7 +24,8 @@ namespace LiveSplit.UI.Components
         }
 
         public string Text1 { get; set; }
-        public string Text2 { get; set; }
+
+        public TimeAccuracy Accuracy { get; set; }
 
         public Font Font1 { get; set; }
         public string Font1String { get { return string.Format("{0} {1}", Font1.FontFamily.Name, Font1.Style); } }
@@ -48,12 +50,12 @@ namespace LiveSplit.UI.Components
             BackgroundColor = Color.Transparent;
             BackgroundColor2 = Color.Transparent;
             BackgroundGradient = GradientType.Plain;
-            Text1 = "Text";
-            Text2 = "";
+            Text1 = "Average";
             OverrideFont1 = false;
             OverrideFont2 = false;
             Font1 = new Font("Segoe UI", 13, FontStyle.Regular, GraphicsUnit.Pixel);
             Font2 = new Font("Segoe UI", 13, FontStyle.Regular, GraphicsUnit.Pixel);
+            Accuracy = TimeAccuracy.Seconds;
 
             chkOverrideTextColor.DataBindings.Add("Checked", this, "OverrideTextColor", false, DataSourceUpdateMode.OnPropertyChanged);
             btnTextColor.DataBindings.Add("BackColor", this, "TextColor", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -67,11 +69,11 @@ namespace LiveSplit.UI.Components
             btnColor1.DataBindings.Add("BackColor", this, "BackgroundColor", false, DataSourceUpdateMode.OnPropertyChanged);
             btnColor2.DataBindings.Add("BackColor", this, "BackgroundColor2", false, DataSourceUpdateMode.OnPropertyChanged);
             txtOne.DataBindings.Add("Text", this, "Text1");
-            txtTwo.DataBindings.Add("Text", this, "Text2");
             chkFont.DataBindings.Add("Checked", this, "OverrideFont1", false, DataSourceUpdateMode.OnPropertyChanged);
             chkFont2.DataBindings.Add("Checked", this, "OverrideFont2", false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
+       
         void chkFont2_CheckedChanged(object sender, EventArgs e)
         {
             label7.Enabled = lblFont2.Enabled = btnFont2.Enabled = chkFont2.Checked;
@@ -96,6 +98,9 @@ namespace LiveSplit.UI.Components
         {
             chkOverrideTextColor_CheckedChanged(null, null);
             chkOverrideTimeColor_CheckedChanged(null, null);
+            rdoSeconds.Checked = Accuracy == TimeAccuracy.Seconds;
+            rdoTenths.Checked = Accuracy == TimeAccuracy.Tenths;
+            rdoHundredths.Checked = Accuracy == TimeAccuracy.Hundredths;
             chkFont_CheckedChanged(null, null);
             chkFont2_CheckedChanged(null, null);
             if (Mode == LayoutMode.Horizontal)
@@ -120,6 +125,31 @@ namespace LiveSplit.UI.Components
             GradientString = cmbGradientType.SelectedItem.ToString();
         }
 
+        void rdoSeconds_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateAccuracy();
+        }
+
+        void rdoTenths_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateAccuracy();
+        }
+
+        void rdoHundredths_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateAccuracy();
+        }
+        
+        void UpdateAccuracy()
+        {
+            if (rdoSeconds.Checked)
+                Accuracy = TimeAccuracy.Seconds;
+            else if (rdoTenths.Checked)
+                Accuracy = TimeAccuracy.Tenths;
+            else
+                Accuracy = TimeAccuracy.Hundredths;
+        }
+
         public void SetSettings(XmlNode node)
         {
             var element = (XmlElement)node;
@@ -130,8 +160,8 @@ namespace LiveSplit.UI.Components
             BackgroundColor = SettingsHelper.ParseColor(element["BackgroundColor"]);
             BackgroundColor2 = SettingsHelper.ParseColor(element["BackgroundColor2"]);
             GradientString = SettingsHelper.ParseString(element["BackgroundGradient"]);
+            Accuracy = SettingsHelper.ParseEnum<TimeAccuracy>(element["Accuracy"]);
             Text1 = SettingsHelper.ParseString(element["Text1"]);
-            Text2 = SettingsHelper.ParseString(element["Text2"]);
             Font1 = SettingsHelper.GetFontFromElement(element["Font1"]);
             Font2 = SettingsHelper.GetFontFromElement(element["Font2"]);
             OverrideFont1 = SettingsHelper.ParseBool(element["OverrideFont1"]);
@@ -153,7 +183,7 @@ namespace LiveSplit.UI.Components
 
         private int CreateSettingsNode(XmlDocument document, XmlElement parent)
         {
-            return SettingsHelper.CreateSetting(document, parent, "Version", "1.4") ^
+            return SettingsHelper.CreateSetting(document, parent, "Version", "1.0") ^
             SettingsHelper.CreateSetting(document, parent, "TextColor", TextColor) ^
             SettingsHelper.CreateSetting(document, parent, "OverrideTextColor", OverrideTextColor) ^
             SettingsHelper.CreateSetting(document, parent, "TimeColor", TimeColor) ^
@@ -162,9 +192,9 @@ namespace LiveSplit.UI.Components
             SettingsHelper.CreateSetting(document, parent, "BackgroundColor2", BackgroundColor2) ^
             SettingsHelper.CreateSetting(document, parent, "BackgroundGradient", BackgroundGradient) ^
             SettingsHelper.CreateSetting(document, parent, "Text1", Text1) ^
-            SettingsHelper.CreateSetting(document, parent, "Text2", Text2) ^
             SettingsHelper.CreateSetting(document, parent, "Font1", Font1) ^
             SettingsHelper.CreateSetting(document, parent, "Font2", Font2) ^
+            SettingsHelper.CreateSetting(document, parent, "Accuracy", Accuracy) ^
             SettingsHelper.CreateSetting(document, parent, "OverrideFont1", OverrideFont1) ^
             SettingsHelper.CreateSetting(document, parent, "OverrideFont2", OverrideFont2) ^
             SettingsHelper.CreateSetting(document, parent, "Display2Rows", Display2Rows);
@@ -190,5 +220,6 @@ namespace LiveSplit.UI.Components
             dialog.ShowDialog(this);
             lblFont.Text = Font2String;
         }
+               
     }
 }

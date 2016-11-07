@@ -1,4 +1,5 @@
 ﻿using LiveSplit.Model;
+using LiveSplit.TimeFormatters;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,15 +10,23 @@ namespace LiveSplit.UI.Components
 {
     public class HistoryAverageComponent : IComponent
     {
-        protected InternalHistoryAverageComponent InternalComponent { get; set; }
+        protected InfoTimeComponent InternalComponent { get; set; }
         public HistoryAverageComponentSettings Settings { get; set; }
+        protected LiveSplitState CurrentState { get; set; }
+
+        protected int PreviousHistorySize { get; set; }
+        protected TimingMethod PreviousTimingMethod { get; set; }
 
         public float PaddingTop => InternalComponent.PaddingTop;
         public float PaddingLeft => InternalComponent.PaddingLeft;
         public float PaddingBottom => InternalComponent.PaddingBottom;
         public float PaddingRight => InternalComponent.PaddingRight;
 
+        public TimeSpan? HistoryAverageValue { get; set; }
+
         public IDictionary<string, Action> ContextMenuControls => null;
+
+        private RegularTimeFormatter Formatter { get; set; }
 
         public HistoryAverageComponent(LiveSplitState state)
         {
@@ -25,36 +34,48 @@ namespace LiveSplit.UI.Components
             {
                 CurrentState = state
             };
-            InternalComponent = new InternalHistoryAverageComponent(Settings);
+            Formatter = new RegularTimeFormatter(Settings.Accuracy);
+            InternalComponent = new InfoTimeComponent(Settings.Text1, TimeSpan.Zero, Formatter);
+            state.OnSplit += state_OnSplit;
+            state.OnUndoSplit += state_OnUndoSplit;
+            state.OnReset += state_OnReset;
+            CurrentState = state;
+            CurrentState.RunManuallyModified += CurrentState_RunModified;
+            UpdateHistoryValue(state);
+        }
+    
+        void CurrentState_RunModified(object sender, EventArgs e)
+        {
+            UpdateHistoryValue(CurrentState);
         }
 
-        private void PrepareDraw(LiveSplitState state, LayoutMode mode)
+        void state_OnReset(object sender, TimerPhase e)
         {
-            InternalComponent.DisplayTwoRows = Settings.Display2Rows;
+            UpdateHistoryValue((LiveSplitState)sender);
+        }
 
-            InternalComponent.NameLabel.HasShadow 
-                = InternalComponent.ValueLabel.HasShadow
-                = state.LayoutSettings.DropShadows;
+        void state_OnUndoSplit(object sender, EventArgs e)
+        {
+            UpdateHistoryValue((LiveSplitState)sender);
+        }
 
-            if (string.IsNullOrEmpty(Settings.Text1) || string.IsNullOrEmpty(Settings.Text2))
-            {
-                InternalComponent.NameLabel.HorizontalAlignment = StringAlignment.Center;
-                InternalComponent.ValueLabel.HorizontalAlignment = StringAlignment.Center;
-                InternalComponent.NameLabel.VerticalAlignment = StringAlignment.Center;
-                InternalComponent.ValueLabel.VerticalAlignment = StringAlignment.Center;
-            }
-            else
-            {
-                InternalComponent.NameLabel.HorizontalAlignment = StringAlignment.Near;
-                InternalComponent.ValueLabel.HorizontalAlignment = StringAlignment.Far;
-                InternalComponent.NameLabel.VerticalAlignment = 
-                    mode == LayoutMode.Horizontal || Settings.Display2Rows ? StringAlignment.Near : StringAlignment.Center;
-                InternalComponent.ValueLabel.VerticalAlignment =
-                    mode == LayoutMode.Horizontal || Settings.Display2Rows ? StringAlignment.Far : StringAlignment.Center;
-            }
+        void state_OnSplit(object sender, EventArgs e)
+        {
+            UpdateHistoryValue((LiveSplitState)sender);
+        }
 
-            InternalComponent.NameLabel.ForeColor = Settings.OverrideTextColor ? Settings.TextColor : state.LayoutSettings.TextColor;
-            InternalComponent.ValueLabel.ForeColor = Settings.OverrideTimeColor ? Settings.TimeColor : state.LayoutSettings.TextColor;
+        void UpdateHistoryValue(LiveSplitState state)
+        {
+            HistoryAverageValue = new TimeSpan(0, 1, 23);
+            PreviousTimingMethod = state.CurrentTimingMethod;
+        }
+
+        private bool CheckIfRunChanged(LiveSplitState state)
+        {
+            if (PreviousTimingMethod != state.CurrentTimingMethod)
+                return true;
+
+            return false;
         }
 
         private void DrawBackground(Graphics g, LiveSplitState state, float width, float height)
@@ -79,14 +100,34 @@ namespace LiveSplit.UI.Components
         public void DrawVertical(Graphics g, LiveSplitState state, float width, Region clipRegion)
         {
             DrawBackground(g, state, width, VerticalHeight);
-            PrepareDraw(state, LayoutMode.Vertical);
+
+            InternalComponent.DisplayTwoRows = Settings.Display2Rows;
+
+            InternalComponent.NameLabel.HasShadow
+                = InternalComponent.ValueLabel.HasShadow
+                = state.LayoutSettings.DropShadows;
+
+            Formatter.Accuracy = Settings.Accuracy;
+
+            InternalComponent.NameLabel.ForeColor = Settings.OverrideTextColor ? Settings.TextColor : state.LayoutSettings.TextColor;
+            InternalComponent.ValueLabel.ForeColor = Settings.OverrideTimeColor ? Settings.TimeColor : state.LayoutSettings.TextColor;
+
             InternalComponent.DrawVertical(g, state, width, clipRegion);
         }
 
         public void DrawHorizontal(Graphics g, LiveSplitState state, float height, Region clipRegion)
         {
             DrawBackground(g, state, HorizontalWidth, height);
-            PrepareDraw(state, LayoutMode.Horizontal);
+
+            InternalComponent.NameLabel.HasShadow
+                = InternalComponent.ValueLabel.HasShadow
+                = state.LayoutSettings.DropShadows;
+
+            Formatter.Accuracy = Settings.Accuracy;
+
+            InternalComponent.NameLabel.ForeColor = Settings.OverrideTextColor ? Settings.TextColor : state.LayoutSettings.TextColor;
+            InternalComponent.ValueLabel.ForeColor = Settings.OverrideTimeColor ? Settings.TimeColor : state.LayoutSettings.TextColor;
+
             InternalComponent.DrawHorizontal(g, state, height, clipRegion);
         }
 
@@ -118,11 +159,10 @@ namespace LiveSplit.UI.Components
 
         public void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
         {
-            InternalComponent.InformationName = Settings.Text1;
-            InternalComponent.InformationValue = Settings.Text2;
-            InternalComponent.LongestString = Settings.Text1.Length > Settings.Text2.Length
-                ? Settings.Text1
-                : Settings.Text2;
+            if (CheckIfRunChanged(state))
+                UpdateHistoryValue(state);
+
+            InternalComponent.TimeValue = HistoryAverageValue;
 
             InternalComponent.Update(invalidator, state, width, height, mode);
         }
