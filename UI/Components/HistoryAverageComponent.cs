@@ -89,11 +89,15 @@ namespace LiveSplit.UI.Components
             }
             HistoryAverageValue = new TimeSpan((long)avgMillis * 10000); //10k ticks to a milli
             PreviousTimingMethod = state.CurrentTimingMethod;
+            PreviousHistorySize = Settings.HistorySize;
         }
 
         private bool CheckIfRunChanged(LiveSplitState state)
         {
             if (PreviousTimingMethod != state.CurrentTimingMethod)
+                return true;
+
+            if (PreviousHistorySize != Settings.HistorySize)
                 return true;
 
             return false;
