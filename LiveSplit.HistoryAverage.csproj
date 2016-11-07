@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LiveSplit</RootNamespace>
-    <AssemblyName>LiveSplit.HistoryAverager</AssemblyName>
+    <AssemblyName>LiveSplit.HistoryAverage</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -63,6 +63,7 @@
     <Compile Include="UI\Components\HistoryAverageComponentSettings.Designer.cs">
       <DependentUpon>HistoryAverageComponentSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Components\HistoryAverageTextComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\LiveSplit.Core\LiveSplit.Core.csproj">

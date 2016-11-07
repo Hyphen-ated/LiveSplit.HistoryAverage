@@ -35,7 +35,7 @@ namespace LiveSplit.UI.Components
                 CurrentState = state
             };
             Formatter = new RegularTimeFormatter(Settings.Accuracy);
-            InternalComponent = new InfoTimeComponent(Settings.Text1, TimeSpan.Zero, Formatter);
+            InternalComponent = new HistoryAverageTimeComponent(Settings, Formatter);
             state.OnSplit += state_OnSplit;
             state.OnUndoSplit += state_OnUndoSplit;
             state.OnReset += state_OnReset;
